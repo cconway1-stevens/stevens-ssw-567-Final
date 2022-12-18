@@ -58,13 +58,11 @@ class TestTriangles(unittest.TestCase):
         """Tests positive input for scalene triangle"""
         self.assertEqual(classify_Triangle(3,4,6),'Scalene','3,4,6 should be scalene')
     def test_Scalene_Triangle_B(self):
-        self.assertEqual(classify_Triangle(5,6,7),'Scalene','5,6,7 should be scalene')
+        self.assertEqual(classify_Triangle(4,6,7),'Scalene','4,6,7 should be scalene')
     def test_Scalene_Triangle_C(self):
-        self.assertEqual(classify_Triangle(10,11,12),'Scalene','10,11,12 should be scalene')
+        self.assertEqual(classify_Triangle(5,6,7),'Scalene','5,6,7 should be scalene')
     def test_Scalene_Triangle_D(self):
-        self.assertEqual(classify_Triangle(100,101,102),'Scalene','100,101,102 should be scalene')
-    def test_Scalene_Triangle_E(self):
-        self.assertEqual(classify_Triangle(1000,1001,1002),'Scalene','1000,1001,1002 should be scalene')
+        self.assertEqual(classify_Triangle(10,11,12),'Scalene','10,11,12 should be scalene')
 
     # isosceles triangle
     def test_Isosceles_Triangle_A(self):
