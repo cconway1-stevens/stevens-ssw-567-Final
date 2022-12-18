@@ -26,6 +26,14 @@ class TestTriangles(unittest.TestCase):
     def test_Equilateral_Triangles(self):
         """Tests positive input for equilateral triangle """
         self.assertEqual(classify_Triangle(4,4,4),'Equilateral','1,1,1 should be equilateral')
+    def test_Equilateral_Triangle_A(self):
+        self.assertEqual(classify_Triangle(1,1,1),'Equilateral','1,1,1 should be an equilateral triangle')
+    def test_Equilateral_Triangle_B(self):
+        self.assertEqual(classify_Triangle(5,5,5),'Equilateral','5,5,5 should be an equilateral triangle')
+    def test_Equilateral_Triangle_C(self):
+        self.assertEqual(classify_Triangle(10,10,10),'Equilateral','10,10,10 should be an equilateral triangle')
+
+
     def test_Not_A_Triangle(self):
         """Tests negative input for triangle but handles correctly"""
         self.assertEqual(classify_Triangle(4,9,2), "NotATriangle")
