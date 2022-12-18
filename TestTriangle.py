@@ -50,8 +50,6 @@ class TestTriangles(unittest.TestCase):
         self.assertEqual(classify_Triangle(10,10,10),'Equilateral','10,10,10 should be an equilateral triangle')
     def test_Equilateral_Triangle_D(self):
         self.assertEqual(classify_Triangle(100,100,100),'Equilateral','100,100,100 should be an equilateral triangle')
-    def test_Equilateral_Triangle_E(self):
-        self.assertEqual(classify_Triangle(1000,1000,1000),'Equilateral','1000,1000,1000 should be an equilateral triangle')
 
     # scalene triangle
     def test_Scalene_Triangle_A(self):
