@@ -1,27 +1,41 @@
 import requests
+import json
+def get_repos_and_commits(github_id):
+    # Make the API call to get the list of repositories for the given GitHub ID
+    repos_url = f"https://api.github.com/users/{github_id}/repos"
+    repos_response = requests.get(repos_url)
 
-def get_repos_with_commits(github_id):
-    # First, get a list of all the repositories for the given GitHub user
-    repositories_url = f'https://api.github.com/users/{github_id}/repos'
-    repositories_response = requests.get(repositories_url)
-    repositories = repositories_response.json()
-    
-    # Initialize an empty list to store the repository information
-    repos_with_commits = []
-    
-    # Iterate through each repository and get the commit information
-    for repo in repositories:
-        repo_name = repo['name']
-        commits_url = f'https://api.github.com/repos/{github_id}/{repo_name}/commits'
-        commits_response = requests.get(commits_url)
-        commits = commits_response.json()
-        
-        # Add the repository name and commit information to the list
-        repos_with_commits.append({'repo_name': repo_name, 'commits': commits})
-    
-    return repos_with_commits
+    # If the API call was successful, parse the list of repositories
+    if repos_response.status_code == 200:
+        repos_data = json.loads(repos_response.text)
+        result = []
+
+        # For each repository, make an API call to get the list of commits
+        for repo in repos_data:
+            repo_name = repo['name']
+            commits_url = f"https://api.github.com/repos/{github_id}/{repo_name}/commits"
+            commits_response = requests.get(commits_url)
+
+            # If the API call was successful, parse the list of commits
+            if commits_response.status_code == 200:
+                commits_data = json.loads(commits_response.text)
+                result.append((repo_name, len(commits_data)))
+            else:
+                print(f"Error getting commits for repository {repo_name}: {commits_response.status_code}")
+
+        return result
+    else:
+        print(f"Error getting repositories: {repos_response.status_code}")
+        return None
 
 # Example usage
-github_id = 'cconway1-stevens'
-repos_with_commits = get_repos_with_commits(github_id)
-print(repos_with_commits)
+github_id = "cconway1-stevens"
+repos_and_commits = get_repos_and_commits(github_id)
+
+if repos_and_commits is not None:
+    for repo_name, commit_count in repos_and_commits:
+        print(f"Repo: {repo_name} Number of commits: {commit_count}")
+
+
+
+
